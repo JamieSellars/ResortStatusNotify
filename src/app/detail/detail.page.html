@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="dark">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title *ngIf="!loading">{{ lift.name }}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+  
+  <ion-card color="dark" *ngIf="!loading">
+
+    <ion-card-header>
+      <ion-card-subtitle>{{ lift.location }}</ion-card-subtitle>
+      <ion-card-title>{{ lift.name }}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      
+      <ion-chip [color]="getLiftStatusChip(lift.status)">
+        {{ lift.status }}
+      </ion-chip>
+
+      <br />
+      <ion-text color="medium">
+        <small>
+          Last updated {{ lift.updatedAt | timeAgo }} at {{ lift.updatedAt | date:'shortTime' }}
+        </small>
+      </ion-text>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card color="dark" *ngIf="!loading">
+
+    <ion-card-header>
+      <ion-card-subtitle>Schedule</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>      
+      <ion-chip color="success">        
+          {{ lift.openTime }}        
+      </ion-chip>  
+      <ion-chip color="danger">
+          {{ lift.closeTime }} 
+      </ion-chip>
+    </ion-card-content>
+
+  </ion-card>
+
+
+  <ion-card color="dark" *ngIf="loading">
+
+      <ion-card-header>
+        <ion-card-title><ion-skeleton-text></ion-skeleton-text></ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        
+          <ion-skeleton-text></ion-skeleton-text>  
+          <ion-skeleton-text></ion-skeleton-text>
+         
+    </ion-card-content>
+  
+    </ion-card>
+  
+
+</ion-content>

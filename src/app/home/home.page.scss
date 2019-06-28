@@ -1,1 +1,30 @@
+.card-status {
+
+    animation: all 0.3s;
+    
+    &.status-closed {
+        opacity: 0.5;
+    }
+
+    &.status-open {
+        opacity: 1;
+    }
+
+}
+
+.lift-status {
+
+    font-weight: 600;
+    
+    &.status-open {
+        color: green;
+    }
+    &.status-closed {
+        color: red;
+    }
+    &.status-onhold {
+        color: skyblue;
+    }
+
+}
 
