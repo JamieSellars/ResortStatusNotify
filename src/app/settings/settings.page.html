@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar color="dark">
+
+   <ion-buttons slot="start">
+      <ion-button (click)="toHome()">
+        <ion-icon  slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+
+    <ion-buttons slot="end">
+
+      <ion-button>
+        <ion-icon slot="icon-only" name="save"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+    
+    <ion-title>Settings</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+
+  <ion-list style="background: none;">
+      <ion-list-header color="dark">
+          You're signed in as
+      </ion-list-header>
+  
+      <ion-item-group color="dark">
+  
+        <ion-item color="dark">
+          <ion-label>{{ settings?.displayName }}</ion-label>
+          <ion-button color="danger" (click)="onLogout()">Logout</ion-button>
+        </ion-item>
+  
+      </ion-item-group>
+  
+    </ion-list>
+
+
+  <ion-list style="background: none;">
+
+    <ion-list-header color="dark">
+        Notifications
+    </ion-list-header>
+
+    <ion-item-group *ngIf="!showNotificationSettings">
+
+      <ion-item color="dark"  *ngIf="notificationPermission == 'denied'">
+        Notifications are disabled / blocked. Please change your browser notification settings
+      </ion-item>
+
+      <ion-item color="dark"  *ngIf="notificationPermission == 'unsupported'">
+        Notifications are not supported by your browser
+      </ion-item>
+
+      <ion-item color="dark" *ngIf="notificationPermission == 'default'">
+        <small>Enable Push Notifications to get instant status updates when you're not using the app.</small>
+      </ion-item>
+
+      <ion-item color="dark" *ngIf="notificationPermission == 'default'">
+        <ion-label>Enable Push Notifications</ion-label>
+        <ion-toggle (click)="requestPermission()"></ion-toggle>
+      </ion-item>
+
+
+    </ion-item-group>
+
+    <ion-item-group color="dark" *ngIf="showNotificationSettings">
+
+      <ion-item color="dark" href="/liftsubscriptions">
+        
+        <ion-label>Subscriptions</ion-label>
+
+      </ion-item>
+     
+    </ion-item-group>
+
+  </ion-list>
+
+  
+
+</ion-content>

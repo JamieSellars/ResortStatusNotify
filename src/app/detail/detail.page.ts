@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LiftstatusService } from '../services/liftstatus.service';
 import { Lift } from 'src/domain/Lift';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -17,23 +16,15 @@ export class DetailPage implements OnInit {
   liftLocation: string;  
   lift: Lift;
 
-  constructor(private liftStatusService: LiftstatusService, private activedRoute: ActivatedRoute) { 
+  constructor(private activedRoute: ActivatedRoute) { 
 
-    activedRoute.params.subscribe( params => {
-
-      this.liftId = params["id"];
-      this.liftLocation = params["location"];
-
-    });
+    
 
   }
 
   ngOnInit() {
 
-    this.liftStatusService.getSingle(this.liftId, this.liftLocation).subscribe((data: Lift) => {
-      this.lift = data;
-      this.loading = false;
-    });
+    
 
   }
   getLiftStatusChip(status: string) : string {

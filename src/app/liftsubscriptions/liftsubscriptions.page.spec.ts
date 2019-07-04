@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoadingComponent } from './loading.component';
+import { LiftsubscriptionsPage } from './liftsubscriptions.page';
 
-describe('LoadingComponent', () => {
-  let component: LoadingComponent;
-  let fixture: ComponentFixture<LoadingComponent>;
+describe('LiftsubscriptionsPage', () => {
+  let component: LiftsubscriptionsPage;
+  let fixture: ComponentFixture<LiftsubscriptionsPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoadingComponent ],
+      declarations: [ LiftsubscriptionsPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoadingComponent);
+    fixture = TestBed.createComponent(LiftsubscriptionsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,32 @@
+<ion-toolbar color="dark">
+    <ion-buttons slot="start">
+        <ion-button (click)="toSettings()">
+          <ion-icon  slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveSubscriptions()">
+        <ion-icon slot="icon-only" name="save"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Subscriptions</ion-title>
+  </ion-toolbar>
+
+<ion-content color="dark">
+    
+  <div *ngIf="subscriptionList.length > 0">
+
+    <ion-item-group color="dark" *ngFor="let location of subscriptionList | groupBy:'location'">
+
+      <ion-item-divider color="dark" sticky="true">{{ location.key }}</ion-item-divider>
+
+      <ion-item color="dark" *ngFor="let lift of location.value">
+        <ion-label>{{ lift.name }}</ion-label>
+        <ion-toggle color="success" [(ngModel)]="lift.subscribed"></ion-toggle>
+      </ion-item>
+
+    </ion-item-group>
+
+  </div>
+  
+</ion-content>

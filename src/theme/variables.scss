@@ -75,3 +75,19 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 }
+
+
+
+
+  ion-refresher, ion-refresher-content {
+
+      background: var(--ion-color-dark);
+      color: var(--ion-color-dark-contrast);
+
+      .refresher-refreshing-icon,
+      .refresher-pulling-icon {
+        color: var(--ion-color-dark-contrast) !important;
+      }
+
+  }
+
