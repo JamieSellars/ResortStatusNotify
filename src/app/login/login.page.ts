@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -10,15 +11,31 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private afAuth: AngularFireAuth, private router: Router) { }
+  constructor(
+    private afAuth: AngularFireAuth, 
+    private router: Router,
+    public loadingController: LoadingController) { }
 
   ngOnInit() {
   }
 
-  login() : void {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(()=>{
-      this.router.navigate(['/settings']);
-    });
+  async login() {
+    
+    try {
+    
+      const loading = await this.loadingController.create({
+        spinner: null,
+        message: 'Signing in with Google',
+        translucent: true
+      });
+
+      await loading.present();
+      await this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+
+    } catch(err) {
+      console.error();
+    }
+
   }
 
   skipLogin() : void {

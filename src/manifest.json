@@ -1,11 +1,11 @@
 {
-  "name": "Lift Status",
-  "short_name": "LiftStatus",
+  "name": "Lift Status Notifier",
+  "short_name": "LiftStatusNotifier",
   "theme_color": "#222428",
   "background_color": "#222428",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "/home",
   "gcm_sender_id": "103953800507",
   "icons": [
     {

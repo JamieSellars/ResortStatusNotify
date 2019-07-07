@@ -10,9 +10,14 @@
       </ion-buttons>
 
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content color="dark">
+
+  <ion-refresher (ionRefresh)="getLifts($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
   <ion-card *ngFor="let lift of liftStatuses | async" color="dark" class="card-status status-open"
       [ngClass]="{ 
@@ -43,3 +48,14 @@
 </ion-card> 
 
 </ion-content>
+
+<ion-footer>
+  
+  <ion-toolbar  color="dark">
+    <ion-item color="dark">
+      <ion-label>Only Show Open Lifts</ion-label>
+      <ion-toggle color="success" [(ngModel)]="showOpenOnly" (click)="toggleOpenOnlyFilter()"></ion-toggle>
+    </ion-item>
+  </ion-toolbar>
+
+</ion-footer>

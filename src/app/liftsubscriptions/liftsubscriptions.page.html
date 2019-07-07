@@ -9,11 +9,16 @@
         <ion-icon slot="icon-only" name="save"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Subscriptions</ion-title>
+    <ion-title>Lifts</ion-title>
   </ion-toolbar>
 
 <ion-content color="dark">
-    
+  
+  <ion-item color="dark">
+    <ion-text>
+      <h5>Select the lifts that you want to be notified about</h5>
+    </ion-text>
+  </ion-item>
   <div *ngIf="subscriptionList.length > 0">
 
     <ion-item-group color="dark" *ngFor="let location of subscriptionList | groupBy:'location'">

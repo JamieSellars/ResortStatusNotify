@@ -1,21 +1,22 @@
 <ion-content color="dark">
 
   <ion-grid style="height: 100%;">
-    <ion-row align-items-end style="height: 100%;">
+    <ion-row align-items-center style="height: 100%;">
       
 
 
       <ion-col>
       
-        <ion-button shape="round" color="dark" expand="full" (click)="login()">
-          <ion-icon slot="start" name="logo-google"></ion-icon>
-          <ion-label>With Google</ion-label>
-        </ion-button>                
-        <ion-button fill="clear" (click)="skipLogin()" expand="full" class="ios">Skip</ion-button>
+        <ion-button shape="round" color="dark" expand="full" (click)="login()">         
+          <ion-label>Sign in With Your Google Account</ion-label>
+        </ion-button>     
+                   
+        <ion-button fill="clear" (click)="skipLogin()" expand="full" class="ios">Back to Lift Status</ion-button>
 
-        <ion-label style="text-align: center">
+        <div class="ion-text-center">
             <small>Customised settings requires you to have an account.</small>
-        </ion-label>
+        </div>
+
 
       </ion-col>
     </ion-row>

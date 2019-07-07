@@ -34,9 +34,10 @@ export class MessagingService {
   updateToken(userId, token) {
     // we can change this function to request our backend service
     this.angularFireAuth.authState.pipe(take(1)).subscribe(
-      (user) => {        
+      (user) => {     
+        console.log(`${token} will be added to ${user.displayName}'s settings`);
         this.angularFireDatabase.database.ref(`/users/${user.uid}/fcmTokens`).push(token);
-      })
+      });
   }
 
   /**
@@ -50,7 +51,9 @@ export class MessagingService {
 
       this.angularFireMessaging.requestToken.subscribe(
         (token) => {
+
           console.log(token);
+
           this.updateToken(userId, token);
   
           return resolve(true);

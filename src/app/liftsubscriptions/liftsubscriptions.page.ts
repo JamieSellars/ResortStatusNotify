@@ -9,6 +9,7 @@ import { take } from 'rxjs/operators';
 import { GroupbyPipe } from '../pipes/groupby.pipe';
 import { Router } from '@angular/router';
 import { User } from 'firebase';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-liftsubscriptions',
@@ -27,37 +28,19 @@ export class LiftsubscriptionsPage implements OnInit {
 
     private angularFireAuth: AngularFireAuth,
     private angularFireDatabase: AngularFireDatabase,
-    private router: Router
-
+    private router: Router,
+    public loadingController: LoadingController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    this.angularFireDatabase.database.ref('/users').once('value').then((users)=>{
-      const liftId = 1;
-      const userArray = users.val();
-      
-      const subscribers: string[] = [];
-      Object.keys(userArray).forEach((key: string) => {
-  
-          const subscriptions = userArray[key].subscriptions;
-      
-          console.log(subscriptions);
+    const loading = await this.loadingController.create({
+      spinner: null,
+      message: 'Getting Subscriptions',
+      translucent: true
+    });
 
-          for(let i = 0; i < subscriptions.length; i++)    
-            if( subscriptions[i].id == liftId ){
-              Object.keys(userArray[key].fcmTokens).forEach((tokenKey)=>{
-                subscribers.push(userArray[key].fcmTokens[tokenKey]);
-              });
-            }      
-              
-      });
-      
-      console.log(subscribers);
-      console.log('send notification');
-     // sendNotification(subscribers, message);
-  
-  }).catch((err)=>{console.error(err)});
+    loading.present();
 
     this.angularFireAuth.user.pipe(take(1)).subscribe((user) => {
       
@@ -73,12 +56,13 @@ export class LiftsubscriptionsPage implements OnInit {
         this.subscriptions = snapshot.val();
 
       }).finally(()=>{
+        
         this.prepareSubscriptionList();
         
+        loading.dismiss();
+
       });
   
-     
-
     });
 
     
@@ -112,7 +96,15 @@ export class LiftsubscriptionsPage implements OnInit {
 
   }
 
-  saveSubscriptions() : void {
+  async saveSubscriptions() {
+
+    const loading = await this.loadingController.create({
+      spinner: null,
+      message: 'Saving Subscriptions',
+      translucent: true
+    });
+
+    loading.present();
 
     this.subscriptions = this.subscriptionList.filter((subscription: LiftSubscription) => {
 
@@ -123,6 +115,8 @@ export class LiftsubscriptionsPage implements OnInit {
     this.angularFireDatabase.database.ref(`/users/${this.user.uid}/subscriptions/`).set(this.subscriptions).then((res)=>{
       this.router.navigate(['/settings']);
     });
+
+    loading.dismiss();
 
   }
 
